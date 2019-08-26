@@ -50,14 +50,14 @@ for (b in B){
     rebalanceForIBk <- rebalanceMyData(BestTrainLSVTDroppedIBk)
     
     #making OneR table
-    OneRModel <- OneR(class ~ ., data = rebalanceForOneR , na.action=NULL)
+    OneRModel <- oneR(class ~ ., data = rebalanceForOneR , na.action=NULL)
     
     predOneR <- predict(OneRModel,BestTestLSVTDroppedOneR, na.action=NULL,seed=1) 
     
     OneRTable[zIndex,bIndex]=getMyFweighted(actual,predOneR)
     
     #making J48 table
-    J48Model <- J48(class ~ ., data = rebalanceForJ48 , na.action=NULL)
+    J48Model <- j48(class ~ ., data = rebalanceForJ48 , na.action=NULL)
     
     predJ48 <- predict(J48Model,BestTestLSVTDroppedJ48, na.action=NULL,seed=1) 
     
@@ -71,9 +71,9 @@ for (b in B){
     NBTable[zIndex,bIndex]=getMyFweighted(actual,predNB)
     
     #making 1NN table
-    IBkRModel <- IBk(class ~ ., data = rebalanceForIBk , na.action=NULL)
+    IBkRModel <- ibk(class ~ ., data = rebalanceForIBk , na.action=NULL)
     
-    predIBk <- predict(OneRModel,BestTestLSVTDroppedIBk, na.action=NULL,seed=1) 
+    predIBk <- predict(IBkRModel,BestTestLSVTDroppedIBk, na.action=NULL,seed=1) 
     
     IBkTable[zIndex,bIndex]=getMyFweighted(actual,predIBk)
     
@@ -114,3 +114,9 @@ AllZandBTable[2,3] <- B[NBBestZandB[2]]
 
 AllZandBTable[1,4] <- Z[IBkBestZandB[1]]
 AllZandBTable[2,4] <- B[IBkBestZandB[2]]
+
+
+
+j=data.frame(actual)
+
+write.csv(j,'/home/ahmed/Desktop/RStudio/Assignment1/file.csv')

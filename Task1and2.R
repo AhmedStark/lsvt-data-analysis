@@ -4,9 +4,9 @@ library(RWekajars)
 
 
 NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
-OneR <- make_Weka_classifier("weka/classifiers/rules/OneR")
-IBk <- make_Weka_classifier("weka/classifiers/lazy/IBk")
-J48 <- make_Weka_classifier("weka/classifiers/trees/J48")
+oneR <- make_Weka_classifier("weka/classifiers/rules/OneR")
+ibk <- make_Weka_classifier("weka/classifiers/lazy/IBk")
+j48 <- make_Weka_classifier("weka/classifiers/trees/J48")
 GainRatio <- make_Weka_attribute_evaluator("weka/attributeSelection/GainRatioAttributeEval")
 
 
@@ -66,7 +66,7 @@ for (K in features_number){
   TestLSVTDropped <- TestLSVT[, !names(TestLSVT) %in% cols.dont.want, drop = T]
   
   #oneR with K number of attributes
-  OneRModel <- OneR(class ~ ., data = TrainLSVTDropped , na.action=NULL)
+  OneRModel <- oneR(class ~ ., data = TrainLSVTDropped , na.action=NULL)
   
   predOneR <- predict(OneRModel,TestLSVTDropped, na.action=NULL,seed=1) 
   
@@ -74,7 +74,7 @@ for (K in features_number){
   
   
   #J48 with K number of attributes
-  J48Model <- J48(class ~ ., data = TrainLSVTDropped , na.action=NULL)
+  J48Model <- j48(class ~ ., data = TrainLSVTDropped , na.action=NULL)
   
   predJ48 <- predict(J48Model,TestLSVTDropped, na.action=NULL,seed=1) 
   
@@ -91,7 +91,7 @@ for (K in features_number){
   
   
   #1NN with K number of attributes
-  IBkModel <- IBk(class ~ ., data = TrainLSVTDropped , na.action=NULL)
+  IBkModel <- ibk(class ~ ., data = TrainLSVTDropped , na.action=NULL)
   
   predIBk <- predict(IBkModel,TestLSVTDropped, na.action=NULL,seed=1) 
   
@@ -118,7 +118,7 @@ BestKIBk=features_number[which.max(F_weightedIBk)]
 #Task2
 
 #oneR with 310 attributes
-OneRModel <- OneR(class ~ ., data = TrainLSVT , na.action=NULL)
+OneRModel <- oneR(class ~ ., data = TrainLSVT , na.action=NULL)
 
 predOneR <- predict(OneRModel,TestLSVT, na.action=NULL,seed=1) 
 
@@ -126,7 +126,7 @@ F_weightedOneRAlldata=getMyFweighted(actual,predOneR)
 
 
 #J48 with 310 attributes
-J48Model <- J48(class ~ ., data = TrainLSVT , na.action=NULL)
+J48Model <- j48(class ~ ., data = TrainLSVT , na.action=NULL)
 
 predJ48 <- predict(J48Model,TestLSVT, na.action=NULL,seed=1) 
 
@@ -143,7 +143,7 @@ F_weightedNBAlldata=getMyFweighted(actual,predNB)
 
 
 #1NN with 310 attributes
-IBkModel <- IBk(class ~ ., data = TrainLSVT , na.action=NULL)
+IBkModel <- ibk(class ~ ., data = TrainLSVT , na.action=NULL)
 
 predIBk <- predict(IBkModel,TestLSVT, na.action=NULL,seed=1) 
 
