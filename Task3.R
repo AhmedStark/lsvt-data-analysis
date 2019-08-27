@@ -115,8 +115,6 @@ AllZandBTable[2,3] <- B[NBBestZandB[2]]
 AllZandBTable[1,4] <- Z[IBkBestZandB[1]]
 AllZandBTable[2,4] <- B[IBkBestZandB[2]]
 
+write.arff(BestTrainLSVTDroppedIBk,file="TrainIbk.arff",eol = "\n")
 
-
-j=data.frame(actual)
-
-write.csv(j,'/home/ahmed/Desktop/RStudio/Assignment1/file.csv')
+write.arff(BestTestLSVTDroppedIBk,file="TestIbk.arff",eol = "\n")
